@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+<!-- active -->
+{% block contact_active %} active {% endblock %}
+
+<!-- block contact -->
+{% block contact %}
+<div class="card contact-us">
+  <div class="card card-dealership">
+    <img class="card-img-top" src="/static/cars.jpeg" alt="Cars image" />
+    <hr />
+    <div class="card-body card-dealership-content">
+      <div class="caller">
+        <img class="card-dealership-content-img" src="/static/contactus.png" alt="Card image" />
+      </div>
+      <div class="caller contacts">
+        <h6>Contact Customer Service</h6>
+        <p><a href="mailto:support@bestcars.com">support@bestcars.com</a></p>
+        <h6>Contact our National Advertising team</h6>
+        <p><a href="mailto:NationalSales@bestcars.com">NationalSales@bestcars.com</a></p>
+        <h6>Contact our Public Relations team</h6>
+        <p><a href="mailto:PR@bestcars.com">PR@bestcars.com</a></p>
+        <h6>Contact the bestcars.com offices</h6>
+        <p><a href="tel:312-611-1111">312-611-1111</a></p>
+        <h6>Become a bestcars.com car dealer</h6>
+        <p>
+          <span>Visit&nbsp;</span
+          ><a href="https://growwithbestcars.com" target="_blank" rel="noopener noreferrer"
+            >growwithbestcars.com</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
