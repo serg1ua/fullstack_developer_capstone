@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-
 import "./Login.css";
-import Header from "../Header/Header";
 
 const Login = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(true);
 
-  let login_url = window.location.origin + "/login";
+  const login_url = window.location.origin + "/login";
 
   const login = async (e) => {
     e.preventDefault();
@@ -39,7 +37,6 @@ const Login = ({ onClose }) => {
 
   return (
     <div>
-      <Header />
       <div onClick={onClose}>
         <div
           onClick={(e) => {

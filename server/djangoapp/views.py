@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 # User registration
 class UserRegistrationView(generic.View):
     initial = {}
-    template_name = "index.html"
+    template_name = "dynamic.html"
 
     def get(self, request):
         return render(request, self.template_name)
@@ -29,7 +29,7 @@ class UserRegistrationView(generic.View):
 # User login
 class UserLoginView(generic.View):
     initial = {}
-    template_name = "index.html"
+    template_name = "dynamic.html"
 
     @method_decorator(csrf_exempt)
     def get(self, request):

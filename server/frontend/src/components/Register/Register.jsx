@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "./Register.css";
 import user_icon from "../assets/person.png";
 import email_icon from "../assets/email.png";
 import password_icon from "../assets/password.png";
 import close_icon from "../assets/close.png";
-import Header from "../Header/Header";
+import "./Register.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -19,8 +18,8 @@ const Register = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    let register_url = window.location.origin + "/register";
-    // Send POST request to register endpoint
+
+    const register_url = window.location.origin + "/register";
     const res = await fetch(register_url, {
       method: "POST",
       headers: {
@@ -45,7 +44,6 @@ const Register = () => {
   };
   return (
     <div>
-      <Header />
       <div className="register_container" style={{ width: "50%" }}>
         <div
           className="header"
