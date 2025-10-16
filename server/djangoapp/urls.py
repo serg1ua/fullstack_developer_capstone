@@ -9,6 +9,7 @@ urlpatterns = [
     path("login", views.UserLoginView.as_view(), name="login"),
     path("logout", views.UserLoginView.as_view(), name="logout"),
     path("register", views.UserRegistrationView.as_view(), name="login"),
+    path("get_cars", views.CarView.as_view(), name="getcars"),
     # path("login", TemplateView.as_view(template_name="index.html")),
     # path for dealer reviews view
     # path for add a review view
