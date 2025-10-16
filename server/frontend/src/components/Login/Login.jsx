@@ -6,7 +6,7 @@ const Login = ({ onClose }) => {
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(true);
 
-  const login_url = window.location.origin + "/login";
+  const login_url = window.location.origin + "/djangoapp/login";
 
   const login = async (e) => {
     e.preventDefault();
@@ -74,7 +74,7 @@ const Login = ({ onClose }) => {
                 onClick={() => setOpen(false)}
               />
             </div>
-            <a className="loginlink" href="/register">
+            <a className="loginlink" href="/djangoapp/register">
               Register Now
             </a>
           </form>
