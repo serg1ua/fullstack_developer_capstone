@@ -1,14 +1,12 @@
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.contrib.auth import login, authenticate
 from django.http.response import HttpResponse as HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views import generic
 from django.http import JsonResponse
-from django.contrib.auth import login, authenticate
 import logging
 import json
 

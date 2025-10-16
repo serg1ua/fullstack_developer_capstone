@@ -20,8 +20,8 @@ def get_request(endpoint, **kwargs):
     try:
         response = requests.get(request_url)
         return response.json()
-    except:
-        print("Network exception occurred")
+    except Exception as err:
+        print("Network exception occurred", err)
 
 
 def analyze_review_sentiments(text):

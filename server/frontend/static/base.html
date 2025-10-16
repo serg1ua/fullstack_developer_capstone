@@ -93,7 +93,7 @@
         }
       };
 
-      let checkSession = () => {
+      (function checkSession() {
         let curr_user = sessionStorage.getItem("username");
 
         if (curr_user && curr_user !== "") {
@@ -102,12 +102,13 @@
             curr_user +
             "</span>" +
             '<a class="homepage_links" onclick="logout()" href="/">Logout</a>';
-        } else {
-          document.getElementById("loginlogout").innerHTML =
-            '<a class="homepage_links" href="/djangoapp/login">Login</a>' +
-            '<a class="homepage_links"  href="/djangoapp/register">Register</a>';
         }
-      };
+        // else {
+        //   document.getElementById("loginlogout").innerHTML =
+        //     '<a class="homepage_links" href="/login">Login</a>' +
+        //     '<a class="homepage_links"  href="/register">Register</a>';
+        // }
+      })();
     </script>
   </body>
 </html>
