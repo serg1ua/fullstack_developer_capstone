@@ -5,12 +5,28 @@ table {
   width: 100%;
 }
 
+select[name="state"] {
+  padding: 8px 0;
+}
+
+tr {
+  border: inset;
+}
+
 td {
   padding: 10px;
   align-self: center;
   border: solid grey 0.5px;
   text-align: center;
   font-size: large;
+}
+
+.postreview_container {
+  margin: 5%;
+}
+
+.postreview_container > h2 {
+  color: darkblue;
 }
 
 .review_panel {

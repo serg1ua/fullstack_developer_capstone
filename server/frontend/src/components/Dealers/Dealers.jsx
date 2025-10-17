@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import reviewIcon from "../assets/reviewicon.png";
-import "../assets/style.css";
 import "./Dealers.css";
 
 const Dealers = () => {
@@ -70,7 +69,7 @@ const Dealers = () => {
   return (
     <div className="dealers-container">
       <table className="table">
-        <thead style={{ border: "inset" }}>
+        <thead>
           <tr>
             <th>ID</th>
             <th>Dealer Name</th>
@@ -78,13 +77,7 @@ const Dealers = () => {
             <th>Address</th>
             <th>Zip</th>
             <th>
-              <select
-                style={{ padding: "8px 0" }}
-                name="state"
-                id="state"
-                value={selectedState}
-                onChange={handleStateChange}
-              >
+              <select name="state" id="state" value={selectedState} onChange={handleStateChange}>
                 <option value="" disabled hidden>
                   State
                 </option>
@@ -110,7 +103,7 @@ const Dealers = () => {
             </tr>
           ) : (
             dealers.map((dealer) => (
-              <tr style={{ border: "inset" }} key={dealer.id}>
+              <tr key={dealer.id}>
                 <td>{dealer.id}</td>
                 <td>
                   <a href={`/dealer/${dealer.id}`}>{dealer.full_name}</a>

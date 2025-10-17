@@ -4,7 +4,6 @@ import positiveIcon from "../assets/positive.png";
 import neutralIcon from "../assets/neutral.png";
 import negativeIcon from "../assets/negative.png";
 import reviewIcon from "../assets/reviewbutton.png";
-import "../assets/style.css";
 import "./Dealers.css";
 
 const Dealer = () => {

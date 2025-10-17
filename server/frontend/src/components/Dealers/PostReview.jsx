@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import "../assets/style.css";
 import "./Dealers.css";
 
 const PostReview = () => {
@@ -87,9 +86,8 @@ const PostReview = () => {
 
   return (
     <div>
-      <div style={{ margin: "5%" }}>
-        <h1 style={{ color: "darkblue" }}>{dealer.full_name}</h1>
-
+      <div className="postreview_container">
+        <h2>{dealer.full_name}</h2>
         <textarea
           id="review"
           cols="50"

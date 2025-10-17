@@ -66,31 +66,19 @@ const Register = () => {
 
   return (
     <div>
-      <div className="register_container" style={{ width: "50%" }}>
-        <div
-          className="header"
-          style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}
-        >
-          <span className="text" style={{ flexGrow: "1" }}>
-            SignUp
-          </span>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifySelf: "end",
-              alignSelf: "start",
-            }}
-          >
+      <div className="register_container">
+        <div className="header">
+          <span className="text">SignUp</span>
+          <div>
             <a
+              className="close_link"
               href="/"
               onClick={(e) => {
                 e.preventDefault();
                 goHome();
               }}
-              style={{ justifyContent: "space-between", alignItems: "flex-end" }}
             >
-              <img style={{ width: "1cm" }} src={close_icon} alt="Close" />
+              <img className="close_icon" src={close_icon} alt="Close" />
             </a>
           </div>
           <hr />
