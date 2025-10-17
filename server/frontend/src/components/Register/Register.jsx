@@ -11,37 +11,59 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const gohome = () => {
+  const goHome = () => {
     window.location.href = window.location.origin;
   };
 
   const register = async (e) => {
     e.preventDefault();
 
-    const register_url = window.location.origin + "/djangoapp/register";
-    const res = await fetch(register_url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-        firstName,
-        lastName,
-        email,
-      }),
-    });
-    const json = await res.json();
-    if (json.status) {
-      sessionStorage.setItem("username", json.username);
-      window.location.href = window.location.origin;
-    } else if (json.error === "Already Registered") {
-      alert("The user with same username is already registered");
-      window.location.href = window.location.origin;
+    if (
+      !username.trim() ||
+      !password.trim() ||
+      !email.trim() ||
+      !firstName.trim() ||
+      !lastName.trim()
+    ) {
+      alert("All fields are required.");
+      return;
+    }
+
+    const registerUrl = `${window.location.origin}/djangoapp/register`;
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch(registerUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password, firstName, lastName, email }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      if (data.status === "Authenticated") {
+        sessionStorage.setItem("username", data.username);
+        window.location.href = window.location.origin;
+      } else if (data.error === "Already Registered") {
+        alert("The user with the same username is already registered.");
+        window.location.href = window.location.origin;
+      } else {
+        alert("Registration failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Registration failed:", err);
+      alert("Something went wrong while registering. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
   return (
     <div>
       <div className="register_container" style={{ width: "50%" }}>
@@ -62,12 +84,13 @@ const Register = () => {
           >
             <a
               href="/"
-              onClick={() => {
-                gohome();
+              onClick={(e) => {
+                e.preventDefault();
+                goHome();
               }}
               style={{ justifyContent: "space-between", alignItems: "flex-end" }}
             >
-              <img style={{ width: "1cm" }} src={close_icon} alt="X" />
+              <img style={{ width: "1cm" }} src={close_icon} alt="Close" />
             </a>
           </div>
           <hr />
@@ -82,6 +105,7 @@ const Register = () => {
                 placeholder="Username"
                 className="input_field"
                 onChange={(e) => setUsername(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -92,6 +116,7 @@ const Register = () => {
                 placeholder="First Name"
                 className="input_field"
                 onChange={(e) => setFirstName(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -102,6 +127,7 @@ const Register = () => {
                 placeholder="Last Name"
                 className="input_field"
                 onChange={(e) => setLastName(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -109,24 +135,31 @@ const Register = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="email"
+                placeholder="Email"
                 className="input_field"
                 onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
             <div className="input">
-              <img src={password_icon} className="img_icon" alt="password" />
+              <img src={password_icon} className="img_icon" alt="Password" />
               <input
                 name="password"
                 type="password"
                 placeholder="Password"
                 className="input_field"
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
           </div>
           <div className="submit_panel">
-            <input className="submit" type="submit" value="Register" />
+            <input
+              className="submit"
+              type="submit"
+              value={isSubmitting ? "Registering..." : "Register"}
+              disabled={isSubmitting}
+            />
           </div>
         </form>
       </div>

@@ -94,9 +94,11 @@
       };
 
       (function checkSession() {
-        let curr_user = sessionStorage.getItem("username");
+        const curr_user = sessionStorage.getItem("username");
 
         if (curr_user && curr_user !== "") {
+          sessionStorage.setItem("firstName", "{{ user.first_name }}");
+          sessionStorage.setItem("lastName", "{{ user.last_name }}");
           document.getElementById("loginlogout").innerHTML =
             '<span class="homepage_links">' +
             curr_user +
