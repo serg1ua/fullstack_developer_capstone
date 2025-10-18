@@ -29,8 +29,8 @@ urlpatterns = [
     ),
     path(route="add_review", view=views.add_review, name="add_review"),
     path("dealers", TemplateView.as_view(template_name="dynamic.html")),
-    path("dealer/<int:dealer_id>", TemplateView.as_view(template_name="dynamic.html")),
+    path("dealer/<int:dealer_id>", TemplateView.as_view(template_name="dynamic.html")),  # noqa: E501
     path(
-        "postreview/<int:dealer_id>", TemplateView.as_view(template_name="dynamic.html")
+        "postreview/<int:dealer_id>", TemplateView.as_view(template_name="dynamic.html")  # noqa: E501
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

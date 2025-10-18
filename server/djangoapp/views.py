@@ -11,7 +11,7 @@ import json
 
 from djangoapp.models import CarMake, CarModel
 from djangoapp.populate import initiate
-from djangoapp.restapis import analyze_review_sentiments, get_request, post_review
+from djangoapp.restapis import analyze_review_sentiments, get_request, post_review   # noqa: E501
 
 
 # Get an instance of a logger
@@ -95,7 +95,7 @@ class CarView(generic.View):
         cars = []
         for car_model in car_models:
             cars.append(
-                {"CarModel": car_model.name, "CarMake": car_model.car_make.name}
+                {"CarModel": car_model.name, "CarMake": car_model.car_make.name}  # noqa: E501
             )
         return JsonResponse({"CarModels": cars})
 
@@ -127,7 +127,7 @@ def get_dealer_reviews(request, dealer_id):
         reviews = get_request(endpoint)
         for review_detail in reviews if reviews and len(reviews) else []:
             response = analyze_review_sentiments(review_detail["review"])
-            review_detail["sentiment"] = response["sentiment"] if response else None
+            review_detail["sentiment"] = response["sentiment"] if response else None  # noqa: E501
         return JsonResponse({"status": 200, "reviews": reviews})
     else:
         return JsonResponse({"status": 400, "message": "Bad Request"})
@@ -136,12 +136,12 @@ def get_dealer_reviews(request, dealer_id):
 # add review
 @login_required
 def add_review(request):
-    if request.user.is_anonymous == False:
+    if request.user.is_anonymous is False:
         data = json.loads(request.body)
         try:
             response = post_review(data)
-            return JsonResponse({"status": 200})
-        except:
-            return JsonResponse({"status": 401, "message": "Error in posting review"})
+            return JsonResponse({"status": 200, "review": response})
+        except Exception:
+            return JsonResponse({"status": 401, "message": "Error in posting review"})  # noqa: E501
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
