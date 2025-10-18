@@ -12,3 +12,6 @@
 - `python3 manage.py createsuperuser`
 
 - `python3 manage.py runserver`
+
+- `kubectl apply -f deployment.yaml`
+- `kubectl port-forward deployment.apps/dealership 8000:8000`
