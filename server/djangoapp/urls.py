@@ -9,7 +9,7 @@ app_name = "djangoapp"
 urlpatterns = [
     path("login", views.UserLoginView.as_view(), name="login"),
     path("logout", views.UserLoginView.as_view(), name="logout"),
-    path("register", views.UserRegistrationView.as_view(), name="login"),
+    path("register", views.UserRegistrationView.as_view(), name="register"),
     path("get_cars", views.CarView.as_view(), name="getcars"),
     path(route="get_dealers", view=views.get_dealerships, name="get_dealers"),
     path(
