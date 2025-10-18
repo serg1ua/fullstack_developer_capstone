@@ -19,51 +19,49 @@
     ></script>
   </head>
   <body>
-    <div>
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-          <h2 class="dealerships">Dealerships</h2>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarText"
-            aria-controls="navbarText"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a
-                  class="nav-link {% block home_active %}{{ active }}{% endblock %}"
-                  aria-current="page"
-                  href="/"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% block about_active %}{{ active }}{% endblock %}" href="/about"
-                  >About Us</a
-                >
-              </li>
-              <li class="nav-item">
-                <a
-                  class="nav-link {% block contact_active %}{{ active }}{% endblock %}"
-                  href="/contact"
-                  >Contact Us</a
-                >
-              </li>
-            </ul>
-            <span class="navbar-text">
-              <div class="loginlink" id="loginlogout"></div>
-            </span>
-          </div>
+    <nav class="navbar navbar-expand-lg navbar-light py-4">
+      <div class="container-fluid">
+        <h2 class="dealerships">Dealerships</h2>
+        <button
+          class="navbar-toggler collapsed"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarText"
+          aria-controls="navbarText"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link {% block home_active %}{{ active }}{% endblock %}"
+                aria-current="page"
+                href="/"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% block about_active %}{{ active }}{% endblock %}" href="/about"
+                >About Us</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link {% block contact_active %}{{ active }}{% endblock %}"
+                href="/contact"
+                >Contact Us</a
+              >
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <div class="loginlink" id="loginlogout"></div>
+          </span>
         </div>
-      </nav>
-    </div>
+      </div>
+    </nav>
 
     <!-- home -->
     {% block home %}{% endblock %}
@@ -81,10 +79,12 @@
         const res = await fetch(logout_url, {
           method: "GET",
         });
-        const json = await res.json();
-        if (json) {
-          let username = sessionStorage.getItem("username");
+        const logout = await res.json();
+        if (logout) {
+          const username = sessionStorage.getItem("username");
           sessionStorage.removeItem("username");
+          sessionStorage.removeItem("first_name");
+          sessionStorage.removeItem("last_name");
           window.location.href = window.location.origin;
           window.location.reload();
           alert("Logging out " + username + "...");
@@ -93,21 +93,19 @@
         }
       };
 
-      let checkSession = () => {
-        let curr_user = sessionStorage.getItem("username");
+      (function checkSession() {
+        const curr_user = sessionStorage.getItem("username");
 
         if (curr_user && curr_user !== "") {
+          sessionStorage.setItem("firstName", "{{ user.first_name }}");
+          sessionStorage.setItem("lastName", "{{ user.last_name }}");
           document.getElementById("loginlogout").innerHTML =
-            '<span class="homepage_links">' +
+            '<span class="homepage_links curr_user">' +
             curr_user +
             "</span>" +
-            '<a class="homepage_links" onclick="logout()" href="/">Logout</a>';
-        } else {
-          document.getElementById("loginlogout").innerHTML =
-            '<a class="homepage_links" href="/djangoapp/login">Login</a>' +
-            '<a class="homepage_links"  href="/djangoapp/register">Register</a>';
+            '<a class="homepage_links" onclick="logout()">Logout</a>';
         }
-      };
+      })();
     </script>
   </body>
 </html>

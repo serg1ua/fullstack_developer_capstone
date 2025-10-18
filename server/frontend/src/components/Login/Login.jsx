@@ -4,47 +4,57 @@ import "./Login.css";
 const Login = ({ onClose }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [open, setOpen] = useState(true);
 
-  const login_url = window.location.origin + "/djangoapp/login";
+  const loginUrl = `${window.location.origin}/djangoapp/login`;
 
-  const login = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(login_url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
+    if (!username.trim() || !password.trim()) {
+      alert("Please enter both username and password.");
+      return;
+    }
 
-    const json = await res.json();
-    if (json.status != null && json.status === "Authenticated") {
-      sessionStorage.setItem("username", json.userName);
-      setOpen(false);
-    } else {
-      alert("The user could not be authenticated.");
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(loginUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      if (data.status === "Authenticated") {
+        sessionStorage.setItem("username", data.username);
+        setOpen(false);
+      } else {
+        alert("The user could not be authenticated.");
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+      alert("Something went wrong during login. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   if (!open) {
     window.location.href = "/";
+    return null;
   }
 
   return (
     <div>
       <div onClick={onClose}>
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-          }}
-          className="modalContainer"
-        >
-          <form className="login_panel" style={{}} onSubmit={login}>
+        <div className="modalContainer" onClick={(e) => e.stopPropagation()}>
+          <form className="login_panel" onSubmit={handleLogin}>
             <div>
               <span className="input_field">Username </span>
               <input
@@ -52,7 +62,9 @@ const Login = ({ onClose }) => {
                 name="username"
                 placeholder="Username"
                 className="input_field"
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -62,19 +74,27 @@ const Login = ({ onClose }) => {
                 type="password"
                 placeholder="Password"
                 className="input_field"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                disabled={isSubmitting}
               />
             </div>
             <div>
-              <input className="action_button" type="submit" value="Login" />
+              <input
+                className="action_button"
+                type="submit"
+                value={isSubmitting ? "Logging in..." : "Login"}
+                disabled={isSubmitting}
+              />
               <input
                 className="action_button"
                 type="button"
                 value="Cancel"
                 onClick={() => setOpen(false)}
+                disabled={isSubmitting}
               />
             </div>
-            <a className="loginlink" href="/djangoapp/register">
+            <a className="loginlink" href="/register">
               Register Now
             </a>
           </form>

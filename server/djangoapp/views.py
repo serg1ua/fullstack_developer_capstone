@@ -1,14 +1,11 @@
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.shortcuts import render
-from django.http.response import HttpResponse as HttpResponse
-from django.shortcuts import render
-from django.contrib.auth import authenticate, login, logout
 from django.utils.decorators import method_decorator
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib.auth.models import User
 from django.views import generic
 from django.http import JsonResponse
-from django.contrib.auth import login, authenticate
 import logging
 import json
 
@@ -29,6 +26,33 @@ class UserRegistrationView(generic.View):
     def get(self, request):
         return render(request, self.template_name)
 
+    @method_decorator(csrf_exempt)
+    def post(self, request):
+        data = json.loads(request.body)
+        username = data["username"]
+        first_name = data["firstName"]
+        last_name = data["lastName"]
+        email = data["email"]
+        password = data["password"]
+
+        user = User.objects.create_user(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password,
+        )
+
+        user_data = {"username": username}
+        if user is not None:
+            login(request, user)
+            user_data = {
+                "username": username,
+                "status": "Authenticated",
+            }
+
+        return JsonResponse(user_data)
+
 
 # User login
 class UserLoginView(generic.View):
@@ -39,7 +63,7 @@ class UserLoginView(generic.View):
     def get(self, request):
         if "logout" in request.path:
             logout(request)
-            data = {"userName": ""}
+            data = {"username": ""}
             return JsonResponse(data)
         return render(request, self.template_name)
 
@@ -50,20 +74,21 @@ class UserLoginView(generic.View):
         password = data["password"]
 
         user = authenticate(username=username, password=password)
-        data = {}
+        user_data = {"username": username}
 
         if user is not None:
             login(request, user)
-            data = {"userName": username, "status": "Authenticated"}
-        print(data, "DATA")
-        return JsonResponse(data)
+            user_data = {
+                "username": username,
+                "status": "Authenticated",
+            }
+        return JsonResponse(user_data)
 
 
 # User login
 class CarView(generic.View):
     def get(self, request):
         count = CarMake.objects.count()
-        print(count)
         if count == 0:
             initiate()
         car_models = CarModel.objects.select_related("car_make")
@@ -102,7 +127,6 @@ def get_dealer_reviews(request, dealer_id):
         reviews = get_request(endpoint)
         for review_detail in reviews if reviews and len(reviews) else []:
             response = analyze_review_sentiments(review_detail["review"])
-            print(response)
             review_detail["sentiment"] = response["sentiment"] if response else None
         return JsonResponse({"status": 200, "reviews": reviews})
     else:
@@ -110,6 +134,7 @@ def get_dealer_reviews(request, dealer_id):
 
 
 # add review
+@login_required
 def add_review(request):
     if request.user.is_anonymous == False:
         data = json.loads(request.body)
