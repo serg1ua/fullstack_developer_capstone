@@ -49,34 +49,34 @@ const Dealers = () => {
 
   return (
     <div className="dealers-container">
-      {isLoading ? (
-        <div class="text-center" style={{ marginTop: "20px" }}>
-          <div
-            class="spinner-border"
-            style={{ width: "4rem", height: "4rem", color: "green" }}
-            role="status"
-          ></div>
-        </div>
-      ) : (
-        <table className="table">
-          <thead>
-            <tr>
-              <th class="col">ID</th>
-              <th class="col-3">Dealer Name</th>
-              <th class="col-2">City</th>
-              <th class="col-3">Address</th>
-              <th class="col">Zip</th>
-              <th class="col-2">
-                <input
-                  type="text"
-                  placeholder="Search states..."
-                  onChange={handleInputChange}
-                  value={searchQuery}
-                />
-              </th>
-              {isLoggedIn && <th class="col">Review</th>}
-            </tr>
-          </thead>
+      <table className="table">
+        <thead>
+          <tr>
+            <th class="col">ID</th>
+            <th class="col-3">Dealer Name</th>
+            <th class="col-2">City</th>
+            <th class="col-3">Address</th>
+            <th class="col">Zip</th>
+            <th class="col-2">
+              <input
+                type="text"
+                placeholder="Search states..."
+                onChange={handleInputChange}
+                value={searchQuery}
+              />
+            </th>
+            {isLoggedIn && <th class="col">Review</th>}
+          </tr>
+        </thead>
+        {isLoading ? (
+          <div class="text-center" style={{ marginTop: "20px" }}>
+            <div
+              class="spinner-border"
+              style={{ width: "4rem", height: "4rem", color: "green" }}
+              role="status"
+            ></div>
+          </div>
+        ) : (
           <tbody>
             {dealers.length === 0 ? (
               <tr>
@@ -85,7 +85,7 @@ const Dealers = () => {
             ) : (
               dealers.map((dealer) => (
                 <tr key={dealer.id}>
-                  <td>{dealer.id + 100}</td>
+                  <td>{dealer.id}</td>
                   <td>
                     <a className="dealer-name" href={`/dealer/${dealer.id}`}>
                       {dealer.full_name}
@@ -106,10 +106,20 @@ const Dealers = () => {
               ))
             )}
           </tbody>
-        </table>
-      )}
+        )}
+      </table>
     </div>
   );
 };
 
 export default Dealers;
+
+// {isLoading ? (
+//   <div class="text-center" style={{ marginTop: "20px" }}>
+//     <div
+//       class="spinner-border"
+//       style={{ width: "4rem", height: "4rem", color: "green" }}
+//       role="status"
+//     ></div>
+//   </div>
+// )
