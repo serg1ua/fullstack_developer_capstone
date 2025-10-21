@@ -67,7 +67,9 @@ app.get("/fetchDealers", async (req, res) => {
 
 app.get("/fetchDealers/:state", async (req, res) => {
   try {
-    const documents = await DealershipModel.find({ state: req.params.state });
+    const documents = await DealershipModel.find({
+      state: { $regex: new RegExp(req.params.state, "i") },
+    });
     res.json(documents);
   } catch (error) {
     res.status(500).json({ error: "Error fetching documents" });
