@@ -98,7 +98,7 @@ const Dealers = () => {
                   {isLoggedIn && (
                     <td>
                       <a href={`/postreview/${dealer.id}`}>
-                        <img src={reviewIcon} className="review_icon" alt="Post Review" />
+                        <img src={reviewIcon} className="review-icon" alt="Post Review" />
                       </a>
                     </td>
                   )}
@@ -113,13 +113,3 @@ const Dealers = () => {
 };
 
 export default Dealers;
-
-// {isLoading ? (
-//   <div class="text-center" style={{ marginTop: "20px" }}>
-//     <div
-//       class="spinner-border"
-//       style={{ width: "4rem", height: "4rem", color: "green" }}
-//       role="status"
-//     ></div>
-//   </div>
-// )

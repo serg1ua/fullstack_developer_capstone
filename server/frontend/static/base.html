@@ -94,16 +94,16 @@
       };
 
       (function checkSession() {
-        const curr_user = sessionStorage.getItem("username");
+        const currUser = sessionStorage.getItem("username");
 
-        if (curr_user && curr_user !== "") {
+        if (currUser && currUser !== "") {
           sessionStorage.setItem("firstName", "{{ user.first_name }}");
           sessionStorage.setItem("lastName", "{{ user.last_name }}");
           document.getElementById("loginlogout").innerHTML =
-            '<span class="homepage_links curr_user">' +
-            curr_user +
+            '<span class="homepage-links curr-user">' +
+            currUser +
             "</span>" +
-            '<a class="homepage_links" onclick="logout()">Logout</a>';
+            '<a class="homepage-links" onclick="logout()">Logout</a>';
         }
       })();
     </script>

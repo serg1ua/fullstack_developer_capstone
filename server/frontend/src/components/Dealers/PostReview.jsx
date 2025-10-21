@@ -86,7 +86,7 @@ const PostReview = () => {
 
   return (
     <div>
-      <div className="postreview_container">
+      <div className="postreview-container">
         <h2>{dealer.full_name}</h2>
         <textarea
           id="review"
@@ -96,11 +96,11 @@ const PostReview = () => {
           onChange={(e) => setReview(e.target.value)}
         />
 
-        <div className="input_field">
+        <div className="input-field">
           Purchase Date <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
         </div>
 
-        <div className="input_field">
+        <div className="input-field">
           Car Make
           <select name="cars" id="cars" value={model} onChange={(e) => setModel(e.target.value)}>
             <option value="" disabled hidden>
@@ -114,7 +114,7 @@ const PostReview = () => {
           </select>
         </div>
 
-        <div className="input_field">
+        <div className="input-field">
           Car Year{" "}
           <input
             type="number"

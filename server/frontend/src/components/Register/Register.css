@@ -20,14 +20,7 @@
   align-items: center;
 }
 
-.input_field {
-  height: 40px;
-  width: 200px;
-  margin: 0.5cm;
-  font-size: medium;
-}
-
-.submit_panel {
+.submit-panel {
   display: flex;
   flex-direction: column;
   margin-top: 5%;
@@ -57,7 +50,7 @@
   margin: 0.5cm;
 }
 
-.img_icon {
+.img-icon {
   width: 40px;
   margin: 0.1cm;
   background-color: #0c9;
@@ -71,11 +64,11 @@
   flex-grow: 1;
 }
 
-.close_link {
+.close-link {
   justify-content: space-between;
   align-items: flex-end;
 }
 
-.close_icon {
+.close-icon {
   width: 1cm;
 }

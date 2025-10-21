@@ -21,15 +21,15 @@ td {
   font-size: large;
 }
 
-.postreview_container {
+.postreview-container {
   margin: 5%;
 }
 
-.postreview_container > h2 {
+.postreview-container > h2 {
   color: darkblue;
 }
 
-.review_panel {
+.review-panel {
   display: flex;
   flex-direction: column;
   border: solid grey;
@@ -61,7 +61,7 @@ th {
   color: black;
 }
 
-.reviews_panel {
+.reviews-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -82,7 +82,7 @@ th {
   margin-top: 1.5cm;
 }
 
-.emotion_icon {
+.emotion-icon {
   align-self: center;
   position: fixed;
   width: 40px;
@@ -94,11 +94,11 @@ th {
   box-shadow: 2px 2px 3px #999;
 }
 
-.review_icon {
+.review-icon {
   width: 40px;
 }
 
-.review_icon:hover {
+.review-icon:hover {
   transform: scale(1.1);
   border: solid lightgray;
 }

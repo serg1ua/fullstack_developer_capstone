@@ -56,24 +56,24 @@ const Login = ({ onClose }) => {
         <div className="modalContainer" onClick={(e) => e.stopPropagation()}>
           <form className="login_panel" onSubmit={handleLogin}>
             <div>
-              <span className="input_field">Username </span>
+              <span className="input-field">Username </span>
               <input
                 type="text"
                 name="username"
                 placeholder="Username"
-                className="input_field"
+                className="input-field"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <span className="input_field">Password </span>
+              <span className="input-field">Password </span>
               <input
                 name="password"
                 type="password"
                 placeholder="Password"
-                className="input_field"
+                className="input-field"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isSubmitting}

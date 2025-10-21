@@ -96,17 +96,17 @@ const Dealer = () => {
         </div>
       )}
 
-      <div className="reviews_panel">
+      <div className="reviews-panel">
         {isLoading ? (
           <span>Loading Reviews...</span>
         ) : unreviewed ? (
           <div>No reviews yet!</div>
         ) : (
           reviews.map((review) => (
-            <div key={review.id || `${review.name}-${review.review}`} className="review_panel">
+            <div key={review.id || `${review.name}-${review.review}`} className="review-panel">
               <img
                 src={sentimentIcon(review.sentiment)}
-                className="emotion_icon"
+                className="emotion-icon"
                 alt={review.sentiment}
               />
               <div className="review">{review.review}</div>
