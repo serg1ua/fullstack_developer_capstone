@@ -19,7 +19,7 @@
     ></script>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg py-4">
+    <nav class="navbar navbar-expand-lg navbar-light py-4">
       <div class="container-fluid">
         <h2 class="dealerships">Dealerships</h2>
         <button
@@ -100,10 +100,10 @@
           sessionStorage.setItem("firstName", "{{ user.first_name }}");
           sessionStorage.setItem("lastName", "{{ user.last_name }}");
           document.getElementById("loginlogout").innerHTML =
-            '<span class="homepage-links curr-user">' +
+            '<span class="auth-links curr-user">' +
             currUser +
             "</span>" +
-            '<a class="homepage-links" onclick="logout()">Logout</a>';
+            '<a class="auth-links" onclick="logout()">Logout</a>';
         }
       })();
     </script>

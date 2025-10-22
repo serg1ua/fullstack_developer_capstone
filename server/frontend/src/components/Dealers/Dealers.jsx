@@ -11,7 +11,6 @@ const Dealers = () => {
   const isLoggedIn = Boolean(sessionStorage.getItem("username"));
   const BASE_URL = "/djangoapp";
 
-  // --- Fetch all dealers ---
   const fetchDealers = useCallback(async (value) => {
     setIsLoading(true);
 
@@ -32,7 +31,6 @@ const Dealers = () => {
     }
   }, []);
 
-  // --- Initial load ---
   useEffect(() => {
     fetchDealers();
   }, [fetchDealers]);
@@ -69,12 +67,8 @@ const Dealers = () => {
           </tr>
         </thead>
         {isLoading ? (
-          <div class="text-center" style={{ marginTop: "20px" }}>
-            <div
-              class="spinner-border"
-              style={{ width: "4rem", height: "4rem", color: "green" }}
-              role="status"
-            ></div>
+          <div class="text-center spinner">
+            <div class="spinner-border" role="status"></div>
           </div>
         ) : (
           <tbody>

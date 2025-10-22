@@ -3,7 +3,6 @@ import userIcon from "../assets/person.png";
 import emailIcon from "../assets/email.png";
 import passwordIcon from "../assets/password.png";
 import closeIcon from "../assets/close.png";
-import "./Register.css";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -66,7 +65,7 @@ const Register = () => {
 
   return (
     <div>
-      <div className="register_container">
+      <div className="auth-container">
         <div className="header">
           <span className="text">SignUp</span>
           <div>
