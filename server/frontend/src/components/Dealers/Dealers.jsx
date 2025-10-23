@@ -46,7 +46,7 @@ const Dealers = () => {
   };
 
   return (
-    <div className="dealers-container">
+    <div className="table-responsive">
       <table className="table">
         <thead>
           <tr>

@@ -32,10 +32,6 @@
   padding: 5px;
 }
 
-.homepage-card {
-  width: 50% !important;
-}
-
 .auth-links {
   text-decoration: none;
   color: var(--bs-heading-color) !important;
@@ -61,6 +57,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+@media screen and (max-width: 990px) {
+  .loginlink {
+    justify-content: center;
+  }
 }
 
 .banner {
@@ -110,18 +112,25 @@ img {
   margin-bottom: 1%;
 }
 
-.card-wrapper {
+.about,
+.homepage-card,
+.contact-us {
+  margin: 3% auto 1% !important;
+  width: 60% !important;
+  border: none !important;
+  border-radius: 5px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-row {
   display: flex;
   flex-direction: row;
-  margin: auto;
+  flex-wrap: wrap;
+  margin: 10px;
 }
 
 .card-item {
-  width: 25%;
-}
-
-.contact-us {
-  width: 60%;
+  height: 95% !important;
 }
 
 .card-dealership {
@@ -165,9 +174,4 @@ img {
   width: 100%;
   display: flex;
   flex-direction: row;
-}
-
-.contact-us {
-  border-radius: 3% !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
