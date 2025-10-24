@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import user_icon from "../assets/person.png";
-import email_icon from "../assets/email.png";
-import password_icon from "../assets/password.png";
-import close_icon from "../assets/close.png";
-import "./Register.css";
+import userIcon from "../assets/person.png";
+import emailIcon from "../assets/email.png";
+import passwordIcon from "../assets/password.png";
+import closeIcon from "../assets/close.png";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -66,19 +65,19 @@ const Register = () => {
 
   return (
     <div>
-      <div className="register_container">
+      <div className="auth-container">
         <div className="header">
           <span className="text">SignUp</span>
           <div>
             <a
-              className="close_link"
+              className="close-link"
               href="/"
               onClick={(e) => {
                 e.preventDefault();
                 goHome();
               }}
             >
-              <img className="close_icon" src={close_icon} alt="Close" />
+              <img className="close-icon" src={closeIcon} alt="Close" />
             </a>
           </div>
           <hr />
@@ -86,62 +85,62 @@ const Register = () => {
         <form onSubmit={register}>
           <div className="inputs">
             <div className="input">
-              <img src={user_icon} className="img_icon" alt="Username" />
+              <img src={userIcon} className="img-icon" alt="Username" />
               <input
                 type="text"
                 name="username"
                 placeholder="Username"
-                className="input_field"
+                className="input-field"
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <img src={user_icon} className="img_icon" alt="First Name" />
+              <img src={userIcon} className="img-icon" alt="First Name" />
               <input
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                className="input_field"
+                className="input-field"
                 onChange={(e) => setFirstName(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <img src={user_icon} className="img_icon" alt="Last Name" />
+              <img src={userIcon} className="img-icon" alt="Last Name" />
               <input
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
-                className="input_field"
+                className="input-field"
                 onChange={(e) => setLastName(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
             <div>
-              <img src={email_icon} className="img_icon" alt="Email" />
+              <img src={emailIcon} className="img-icon" alt="Email" />
               <input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="input_field"
+                className="input-field"
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
             <div className="input">
-              <img src={password_icon} className="img_icon" alt="Password" />
+              <img src={passwordIcon} className="img-icon" alt="Password" />
               <input
                 name="password"
                 type="password"
                 placeholder="Password"
-                className="input_field"
+                className="input-field"
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
           </div>
-          <div className="submit_panel">
+          <div className="submit-panel">
             <input
               className="submit"
               type="submit"

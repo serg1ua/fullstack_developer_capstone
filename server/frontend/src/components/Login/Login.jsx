@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "./Login.css";
+import userIcon from "../assets/person.png";
+import passwordIcon from "../assets/password.png";
+import closeIcon from "../assets/close.png";
 
 const Login = ({ onClose }) => {
   const [username, setUsername] = useState("");
@@ -8,6 +10,10 @@ const Login = ({ onClose }) => {
   const [open, setOpen] = useState(true);
 
   const loginUrl = `${window.location.origin}/djangoapp/login`;
+
+  const goHome = () => {
+    window.location.href = window.location.origin;
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -52,53 +58,57 @@ const Login = ({ onClose }) => {
 
   return (
     <div>
-      <div onClick={onClose}>
-        <div className="modalContainer" onClick={(e) => e.stopPropagation()}>
-          <form className="login_panel" onSubmit={handleLogin}>
-            <div>
-              <span className="input_field">Username </span>
+      <div className="auth-container">
+        <div className="header">
+          <span className="text">LogIn</span>
+          <div>
+            <a
+              className="close-link"
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                goHome();
+              }}
+            >
+              <img className="close-icon" src={closeIcon} alt="Close" />
+            </a>
+          </div>
+          <hr />
+        </div>
+        <form onSubmit={handleLogin}>
+          <div className="inputs">
+            <div className="input">
+              <img src={userIcon} className="img-icon" alt="Username" />
               <input
                 type="text"
                 name="username"
                 placeholder="Username"
-                className="input_field"
-                value={username}
+                className="input-field"
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
-            <div>
-              <span className="input_field">Password </span>
+            <div className="input">
+              <img src={passwordIcon} className="img-icon" alt="Password" />
               <input
                 name="password"
                 type="password"
                 placeholder="Password"
-                className="input_field"
-                value={password}
+                className="input-field"
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isSubmitting}
               />
             </div>
-            <div>
-              <input
-                className="action_button"
-                type="submit"
-                value={isSubmitting ? "Logging in..." : "Login"}
-                disabled={isSubmitting}
-              />
-              <input
-                className="action_button"
-                type="button"
-                value="Cancel"
-                onClick={() => setOpen(false)}
-                disabled={isSubmitting}
-              />
-            </div>
-            <a className="loginlink" href="/register">
-              Register Now
-            </a>
-          </form>
-        </div>
+          </div>
+          <div className="submit-panel">
+            <input
+              className="submit"
+              type="submit"
+              value={isSubmitting ? "Login in..." : "Login"}
+              disabled={isSubmitting}
+            />
+          </div>
+        </form>
       </div>
     </div>
   );
