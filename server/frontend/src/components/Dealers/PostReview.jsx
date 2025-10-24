@@ -8,7 +8,7 @@ const PostReview = () => {
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
   const [date, setDate] = useState("");
-  const [carmodels, setCarmodels] = useState([]);
+  const [carModels, setCarModels] = useState([]);
 
   const { id } = useParams();
 
@@ -35,7 +35,7 @@ const PostReview = () => {
         const res = await fetch(carmodelsUrl);
         const data = await res.json();
         if (Array.isArray(data.CarModels)) {
-          setCarmodels(data.CarModels);
+          setCarModels(data.CarModels);
         }
       } catch (err) {
         console.error("Failed to fetch car models:", err);
@@ -87,44 +87,56 @@ const PostReview = () => {
   return (
     <div>
       <div className="postreview-container">
-        <h2>{dealer.full_name}</h2>
-        <textarea
-          id="review"
-          cols="50"
-          rows="7"
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        />
-
-        <div className="input-field">
-          Purchase Date <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <div className="review-textarea">
+          <h2>{dealer.full_name}</h2>
+          <div class="mb-3">
+            <textarea
+              class="form-control"
+              rows="10"
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+            />
+          </div>
         </div>
-
+        <div className="input-field">
+          Purchase Date{" "}
+          <input
+            type="date"
+            class="form-control"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+        </div>
         <div className="input-field">
           Car Make
-          <select name="cars" id="cars" value={model} onChange={(e) => setModel(e.target.value)}>
+          <select
+            class="form-select"
+            name="cars"
+            id="cars"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+          >
             <option value="" disabled hidden>
               Choose Car Make and Model
             </option>
-            {carmodels.map((carmodel, index) => (
+            {carModels.map((carmodel, index) => (
               <option key={index} value={`${carmodel.CarMake} ${carmodel.CarModel}`}>
                 {carmodel.CarMake} {carmodel.CarModel}
               </option>
             ))}
           </select>
         </div>
-
         <div className="input-field">
           Car Year{" "}
           <input
             type="number"
+            class="form-control"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            max={2025}
-            min={2015}
+            max={new Date(Date.now()).getFullYear()}
+            min={new Date(Date.now()).getFullYear() - 10}
           />
         </div>
-
         <div>
           <button className="postreview" onClick={handleSubmit} disabled={!isFormValid}>
             Post Review

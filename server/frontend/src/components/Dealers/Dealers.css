@@ -26,15 +26,18 @@ td {
   margin: 5%;
 }
 
-.postreview-container > h2 {
+.review-textarea {
+  text-align: center;
+}
+
+.review-textarea h2 {
   color: darkblue;
 }
 
-.review-panel {
+.review-card {
   display: flex;
   flex-direction: column;
   border: solid grey;
-  position: relative;
   height: 7cm;
   width: 6cm;
   overflow-y: scroll;
@@ -47,8 +50,9 @@ td {
 }
 
 .postreview {
-  margin: 20px;
-  padding: 10px;
+  margin-top: 1rem;
+  padding: 4px 10px;
+  border-radius: 4px;
   font-size: larger;
 }
 
@@ -62,14 +66,13 @@ th {
   color: black;
 }
 
-.reviews-panel {
+.review-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   column-gap: 1cm;
   overflow-wrap: normal;
   margin-top: 1cm;
-  align-items: flex-start;
 }
 
 .reviewer {
@@ -85,7 +88,6 @@ th {
 
 .emotion-icon {
   align-self: center;
-  position: fixed;
   width: 40px;
   height: 40px;
   background-color: #0c9;
@@ -120,4 +122,33 @@ th {
   width: 4rem;
   height: 4rem;
   color: var(--main-color);
+}
+
+#review {
+  width: fit-content !important;
+}
+
+.dealer-container,
+.dealer-error-container {
+  margin: 20px;
+}
+
+.dealer-error {
+  color: grey;
+}
+
+.dealer-content {
+  margin: 10px;
+}
+
+.dealer-content h1,
+.dealer-content h4 {
+  margin: 10px;
+  color: grey;
+}
+
+.dealer-content img {
+  width: 6rem;
+  margin-left: 10px;
+  margin-top: 10px;
 }

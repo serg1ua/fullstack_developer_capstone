@@ -35,17 +35,14 @@ const Dealer = () => {
     const fetchDealerAndReviews = async () => {
       try {
         const [dealerRes, reviewsRes] = await Promise.all([fetch(dealerUrl), fetch(reviewsUrl)]);
-
         const [dealerData, reviewsData] = await Promise.all([dealerRes.json(), reviewsRes.json()]);
 
-        // --- Dealer handling ---
         if (dealerData.status === 200 && dealerData.dealer) {
           setDealer(dealerData.dealer);
         } else {
           setFetchError(true);
         }
 
-        // --- Reviews handling ---
         if (reviewsData.status === 200) {
           if (Array.isArray(reviewsData.reviews) && reviewsData.reviews.length > 0) {
             setReviews(reviewsData.reviews);
@@ -68,42 +65,38 @@ const Dealer = () => {
 
   if (fetchError) {
     return (
-      <div style={{ margin: "20px" }}>
-        <h2 style={{ color: "grey" }}>Dealer not found</h2>
+      <div className="dealer-error-container">
+        <h2 className="dealer-error">Dealer not found</h2>
       </div>
     );
   }
 
   return (
-    <div style={{ margin: "20px" }}>
+    <div className="dealer-container">
       {dealer && (
-        <div style={{ marginTop: "10px" }}>
-          <h1 style={{ color: "grey" }}>
+        <div className="dealer-content">
+          <h1>
             {dealer.full_name}
             {isLoggedIn && (
               <a href={postReviewUrl}>
-                <img
-                  src={reviewIcon}
-                  style={{ width: "10%", marginLeft: "10px", marginTop: "10px" }}
-                  alt="Post Review"
-                />
+                <img src={reviewIcon} alt="Post Review" />
               </a>
             )}
           </h1>
-          <h4 style={{ color: "grey" }}>
+          <h4>
             {dealer.city}, {dealer.address}, Zip - {dealer.zip}, {dealer.state}
           </h4>
         </div>
       )}
 
-      <div className="reviews-panel">
+      <div className="review-panel">
         {isLoading ? (
           <span>Loading Reviews...</span>
         ) : unreviewed ? (
           <div>No reviews yet!</div>
         ) : (
           reviews.map((review) => (
-            <div key={review.id || `${review.name}-${review.review}`} className="review-panel">
+            <div key={review.id || `${review.name}-${review.review}`} className="review-card">
               <img
                 src={sentimentIcon(review.sentiment)}
                 className="emotion-icon"
